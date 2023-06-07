@@ -1,0 +1,73 @@
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    .forecast-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+.page-background {
+    background: linear-gradient(to bottom, #87ceeb, #000000);
+}
+
+/*Title of page CSS*/
+
+.banner {
+    background: linear-gradient(to bottom, #87CEEB, #000000);
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 3px;
+  }
+  
+  .banner h1 {
+    margin: 0;
+    color: #FFFFFF;
+  }
+
+/*Current Weather CSS*/
+section {
+    display: flex;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .search-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  #current-weather-container {
+    display: grid;
+    margin-left: 1%;
+    flex-grow: 1;
+    justify-content: left;
+    background-color: #87CEEB;  
+}
+
+/*CSS for Forecast*/
+
+.forecast-heading {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.forecast-grid {
+    display: grid;
+    border-width: 3px;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1rem;
+    margin-left: 1.7rem;
+    background-color: rgb(169, 16, 240);
+  }
+
+/*CSS for history*/
+
+.history-item {
+    margin-bottom: 5px;
+  }
+
+.history-list {
+    margin-top: 10%;
+    display: grid;
+}
