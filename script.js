@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
         weatherInfo.appendChild(humidity);
 
         var windSpeed = document.createElement('p');
-        windSpeed.textContent = 'Wind Speed: ' + data.list[0].wind.speed + 'm/s';
+        windSpeed.textContent = 'Wind Speed: ' + data.list[0].wind.speed + 'mph';
         weatherInfo.appendChild(windSpeed);
 
         weatherInfo.style.display = 'block'
@@ -111,7 +111,7 @@ function displayForecast(data) {
         forecastBox.appendChild(humidity);
 
         var windSpeed = document.createElement('p');
-        windSpeed.textContent = 'Wind Speed: ' + forecast.wind.speed + 'm/s';
+        windSpeed.textContent = 'Wind Speed: ' + forecast.wind.speed + 'mph';
         forecastBox.appendChild(windSpeed);
 
         forecastContainer.appendChild(forecastBox);
