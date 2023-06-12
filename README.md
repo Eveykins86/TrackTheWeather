@@ -1,7 +1,7 @@
 # TrackTheWeather
 
 ## Description
-Created a weather traking app using HTML, CSS, and JavaScript. The user can enter a city and state and the current weather will display on the main page. A 5 day forcast for that search will display underneath that. A search history will display with the option to click on that search history to pull up the current wather for that city. There is also an option to delete the city from the list as well as a "Clear All" button that will clear the local storage.
+Created a weather traking app using HTML, CSS, JavaScript, and WeatherMap API. The user can enter a city and state and the current weather will display on the main page. A 5 day forcast for that search will display underneath the current weather. A search history will display with the option to click on that search history to pull up the current wather for that city. There is also an option to delete the city from the list as well as a "Clear All" button that will clear the local storage.
 
 ## Website Preview
 
