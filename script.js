@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
             awesomplete.list = suggestions;
           })
           .catch(function(error) {
-            console.log('Error', error);
           });
       } else {
         awesomplete.list = [];
@@ -78,7 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     saveSearch(inputValue);
                     displayForecast(data);
                     displaySearchHistory();
-                    console.log(data);
                 })
                 .catch(function(error) {
                   displayErrorMessage('City not found');
@@ -88,7 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 //Function to display weather details
     function displayWeather(data) {
-        console.log(data)
 
 //Display current weather for selected city 
         var cityNameElement = document.getElementById('city-name');
@@ -251,7 +248,6 @@ function saveSearch(city) {
 
   //Function to display weather details
   function displayWeather(data) {
-    console.log(data)
 
 //Display current weather for selected city 
     var cityNameElement = document.getElementById('city-name');
@@ -306,10 +302,8 @@ function saveSearch(city) {
       .then(function(data) {
         displayWeather(data);
         displayForecast(data);
-        console.log(data);
       })
       .catch(function(error) {
-        console.log('Error', error);
       });
   }
   displaySearchHistory();
