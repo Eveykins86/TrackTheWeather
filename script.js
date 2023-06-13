@@ -249,6 +249,47 @@ function saveSearch(city) {
   clearButton.style.color = 'white';
   clearButton.style.borderRadius = '4px';
 
+  //Function to display weather details
+  function displayWeather(data) {
+    console.log(data)
+
+//Display current weather for selected city 
+    var cityNameElement = document.getElementById('city-name');
+    cityNameElement.textContent = data.city.name;
+
+    var dateElement = document.getElementById('date');
+    var currentDate = new Date();
+    dateElement.textContent = currentDate.toLocaleDateString();
+
+    var weatherInfo = document.getElementById('weather-info');
+
+    weatherInfo.innerHTML = '';
+
+    var weatherDescription = document.createElement('p');
+    weatherDescription.textContent = 'Description: ' + data.list[0].weather[0].description;
+    weatherInfo.appendChild(weatherDescription);
+
+    var iconUrl = 'https://openweathermap.org/img/wn/' + data.list[0].weather[0].icon + '@2x.png';
+    var weatherIcon = document.createElement('img');
+    weatherIcon.src = iconUrl;
+    weatherInfo.appendChild(weatherIcon);
+
+    var temperature = document.createElement('p');
+    temperature.textContent = 'Temperature: ' + data.list[0].main.temp + '°F';
+    weatherInfo.appendChild(temperature);
+
+    var humidity = document.createElement('p');
+    humidity.textContent = 'Humidity: ' + data.list[0].main.humidity + '%';
+    weatherInfo.appendChild(humidity);
+
+    var windSpeed = document.createElement('p');
+    windSpeed.textContent = 'Wind Speed: ' + data.list[0].wind.speed + 'mph';
+    weatherInfo.appendChild(windSpeed);
+
+    weatherInfo.style.display = 'block'
+
+}
+
   function fetchWeatherAndForecast(city) {
     var apiKey = '781ce9035df6e9347a59fe385dbef781';
     var apiUrl =
