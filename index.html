@@ -15,6 +15,14 @@
         </div>
     </header>
     <main>
+        <!--Modal for error message-->
+        <div id="error-modal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p id="error-message"></p>
+            </div>
+          </div>
+          
         <!--Main content of app here-->
         <section id="container">
             <div id="search-container">
@@ -38,12 +46,14 @@
             <div id="forecast-display">
                 <h2 class="forecast-heading">5 Day Forecast</h2>
                 <div id="forecast-container" class="forecast-grid">
-                    <!--Add the dynamically updated forecast information here-->
+                    <!--Dynamically updated forecast information here-->
                 </div>
             </div>
         </section>
     </main>
 
     <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.2/awesomplete.min.js"></script>
+
 </body>
 </html>

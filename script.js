@@ -1,15 +1,62 @@
 //Form inputs for City and State
 document.addEventListener('DOMContentLoaded', function() {
     var searchButton = document.getElementById('search-button');
-    var historyContainer = document.getElementById('history-container')
-    var locationInput = document.getElementById('location-input')
+    var historyContainer = document.getElementById('history-container');
+    var locationInput = document.getElementById('location-input');
   
-    searchButton.addEventListener('click', performSearch);
-    locationInput.addEventListener('keypress', function(event) {
-      if (event.key === 'Enter') {
-        performSearch();
+    var awesomplete = new Awesomplete(locationInput);
+  
+    locationInput.addEventListener('input', function() {
+      var inputValue = locationInput.value.trim();
+      if (inputValue !== '') {
+        var apiUrl = `https://api.teleport.org/api/cities/?search=${encodeURIComponent(inputValue)}`;
+        fetch(apiUrl)
+          .then(function(response) {
+            return response.json();
+          })
+          .then(function(data) {
+            var suggestions = data._embedded['city:search-results'].map(function(result) {
+              return result.matching_full_name;
+            });
+            awesomplete.list = suggestions;
+          })
+          .catch(function(error) {
+            console.log('Error', error);
+          });
+      } else {
+        awesomplete.list = [];
       }
     });
+
+    function displayErrorMessage(message) {
+        var errorMessage = document.getElementById('error-message');
+        errorMessage.textContent = message;
+      
+        var modal = document.getElementById('error-modal');
+        modal.style.display = 'block';
+      
+        var closeButton = document.getElementsByClassName('close')[0];
+        closeButton.onclick = function() {
+          modal.style.display = 'none';
+        };
+      
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = 'none';
+          }
+        };
+      }
+  
+    locationInput.addEventListener('awesomplete-selectcomplete', function() {
+        performSearch();
+      });
+    
+      searchButton.addEventListener('click', performSearch);
+      locationInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+          performSearch();
+        }
+      });
   
     function performSearch() {
       var inputValue = locationInput.value.trim();
@@ -19,10 +66,14 @@ document.addEventListener('DOMContentLoaded', function() {
             var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + encodeURIComponent(inputValue) + '&appid=' + apiKey + '&units=imperial';
 
             fetch(apiUrl)
-                .then(function(response) {
-                    return response.json();
-                })
-                .then(function(data) {
+            .then(function(response) {
+              if (response.ok) {
+                return response.json();
+              } else {
+                throw new Error('City not found');
+              }
+            })
+            .then(function(data) {
                     displayWeather(data);
                     saveSearch(inputValue);
                     displayForecast(data);
@@ -30,11 +81,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log(data);
                 })
                 .catch(function(error) {
-                     console.log('Error', error);
+                  displayErrorMessage('City not found');
                 });
+
                 locationInput.value = '';
-        }
-    };
+            }
 //Function to display weather details
     function displayWeather(data) {
         console.log(data)
@@ -75,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
         weatherInfo.style.display = 'block'
 
     }
-
+};
 //Display Forcast for next 5 days
 
 function displayForecast(data) {
